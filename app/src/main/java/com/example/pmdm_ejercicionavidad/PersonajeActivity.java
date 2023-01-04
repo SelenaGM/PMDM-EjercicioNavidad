@@ -11,7 +11,6 @@ import android.widget.Toast;
 import com.example.pmdm_ejercicionavidad.adapters.PersonajeAdapter;
 import com.example.pmdm_ejercicionavidad.conexiones.ApiConexiones;
 import com.example.pmdm_ejercicionavidad.conexiones.RetrofitObject;
-import com.example.pmdm_ejercicionavidad.modelos.Characters;
 import com.example.pmdm_ejercicionavidad.modelos.DataItem;
 
 import java.util.ArrayList;

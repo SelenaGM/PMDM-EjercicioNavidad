@@ -1,11 +1,16 @@
 package com.example.pmdm_ejercicionavidad;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
+import android.view.View;
+import android.widget.AbsListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.pmdm_ejercicionavidad.adapters.CaracteresAdapters;
@@ -29,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView contenedor;
     private List<DataItem> caracteresList;
     private CaracteresAdapters adapter;
-    private RecyclerView.LayoutManager lm;
-
+    //private RecyclerView.LayoutManager lm;
+    private LinearLayoutManager lm;
 
 
     private Retrofit retrofit;
@@ -42,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        contenedor = findViewById(R.id.contenedorPersonaje);
+        contenedor = findViewById(R.id.contenedor);
         caracteresList = new ArrayList<>();
         adapter = new CaracteresAdapters(caracteresList, R.layout.caracteres_view_holder, this);
         lm = new LinearLayoutManager(this);
@@ -50,15 +55,28 @@ public class MainActivity extends AppCompatActivity {
         contenedor.setAdapter(adapter);
         contenedor.setLayoutManager(lm);
 
+
+
         retrofit= RetrofitObject.getConexion();
         api = retrofit.create(ApiConexiones.class);
-
 
 
         cargarCaracteres();
 
 
+       contenedor.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+                if(!contenedor.canScrollVertically(1)){
+                    Toast.makeText(MainActivity.this, "Última", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
+
 
     private void cargarCaracteres() {
         Call<Characters> doGetCaracteres = api.getCaracteres();
@@ -69,6 +87,8 @@ public class MainActivity extends AppCompatActivity {
                 if(response.code() == HttpsURLConnection.HTTP_OK && response.body()!=null){
                     caracteresList.addAll(response.body().getData());
                     adapter.notifyItemRangeInserted(0,caracteresList.size());
+
+
                     }else{
                     Toast.makeText(MainActivity.this, response.message(), Toast.LENGTH_SHORT).show();
 
