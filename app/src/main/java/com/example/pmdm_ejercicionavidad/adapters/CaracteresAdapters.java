@@ -1,6 +1,8 @@
 package com.example.pmdm_ejercicionavidad.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pmdm_ejercicionavidad.PersonajeActivity;
 import com.example.pmdm_ejercicionavidad.R;
 import com.example.pmdm_ejercicionavidad.modelos.Characters;
 import com.example.pmdm_ejercicionavidad.modelos.DataItem;
@@ -39,6 +42,17 @@ public class CaracteresAdapters extends RecyclerView.Adapter<CaracteresAdapters.
     public void onBindViewHolder(@NonNull CaracteresAdapters.CaracterVH holder, int position) {
         DataItem c = objects.get(position);
         holder.lblTitulo.setText(c.getName());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, PersonajeActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("PERSONAJE_ID", String.valueOf(c.getId()));
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
 
     }
 

@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private CaracteresAdapters adapter;
     private RecyclerView.LayoutManager lm;
 
-    
+
 
     private Retrofit retrofit;
     private ApiConexiones api;
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        contenedor = findViewById(R.id.contenedor);
+        contenedor = findViewById(R.id.contenedorPersonaje);
         caracteresList = new ArrayList<>();
         adapter = new CaracteresAdapters(caracteresList, R.layout.caracteres_view_holder, this);
         lm = new LinearLayoutManager(this);
@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
 
         retrofit= RetrofitObject.getConexion();
         api = retrofit.create(ApiConexiones.class);
+
+
 
         cargarCaracteres();
 

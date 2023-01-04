@@ -130,17 +130,17 @@ public class DataItem{
  	public String toString(){
 		return 
 			"DataItem{" + 
-			"videoGames = '" + videoGames + '\'' + 
-			",parkAttractions = '" + parkAttractions + '\'' + 
-			",films = '" + films + '\'' + 
-			",shortFilms = '" + shortFilms + '\'' + 
-			",tvShows = '" + tvShows + '\'' + 
-			",imageUrl = '" + imageUrl + '\'' + 
-			",name = '" + name + '\'' + 
-			",enemies = '" + enemies + '\'' + 
-			",_id = '" + id + '\'' + 
-			",allies = '" + allies + '\'' + 
-			",url = '" + url + '\'' + 
+			"videoGames = '" + videoGames + '\'' + '\n' +
+			",parkAttractions = '" + parkAttractions + '\n' +  '\n' +
+			",films = '" + films + '\'' + + '\n' +
+			",shortFilms = '" + shortFilms + '\'' + + '\n' +
+			",tvShows = '" + tvShows + '\'' +  '\n' +
+			",imageUrl = '" + imageUrl + '\'' + + '\n' +
+			",name = '" + name + '\'' + '\n' +
+			",enemies = '" + enemies + '\'' +  '\n' +
+			",_id = '" + id + '\'' + '\n' +
+			",allies = '" + allies + '\'' + '\n' +
+			",url = '" + url + '\'' + '\n' +
 			"}";
 		}
 }
