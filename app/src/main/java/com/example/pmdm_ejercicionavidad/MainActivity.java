@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView contenedor;
     private List<DataItem> caracteresList;
     private CaracteresAdapters adapter;
+    private int pagina= 1;
     //private RecyclerView.LayoutManager lm;
     private LinearLayoutManager lm;
 
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         api = retrofit.create(ApiConexiones.class);
 
 
-        cargarCaracteres();
+        cargarCaracteres(pagina);
 
 
        contenedor.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -70,7 +71,13 @@ public class MainActivity extends AppCompatActivity {
                 super.onScrollStateChanged(recyclerView, newState);
 
                 if(!contenedor.canScrollVertically(1)){
-                    Toast.makeText(MainActivity.this, "Última", Toast.LENGTH_SHORT).show();
+                    if(pagina>=1 && pagina < 149 ){
+                        pagina++;
+                        cargarCaracteres(pagina);
+                    }else{
+                        pagina = 1;
+                        cargarCaracteres(pagina);
+                    }
                 }
             }
         });
@@ -78,8 +85,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void cargarCaracteres() {
-        Call<Characters> doGetCaracteres = api.getCaracteres();
+    private void cargarCaracteres(int p) {
+        Call<Characters> doGetCaracteres = api.getCaracteres(String.valueOf(p));
 
         doGetCaracteres.enqueue(new Callback<Characters>() {
             @Override
